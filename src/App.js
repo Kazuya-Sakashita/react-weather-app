@@ -20,13 +20,13 @@ const[results,setResults] = useState({
 
 const getWeather = (e) => {
     e.preventDefault();
-    axios.get("https://api.weatherapi.com/v1/current.json?key=e3ff31ba67a145e2926104156210607&q=London&aqi=no")
+    axios.get(`https://api.weatherapi.com/v1/current.json?key=e3ff31ba67a145e2926104156210607&q=${city}&aqi=no`)
     .then(res => {
       setResults({
         country:res.data.location.country,
         cityName:res.data.location.name,
         temperature:res.data.current.temp_c,
-        condition:res.data.current.condition.text,
+        conditionText:res.data.current.condition.text,
         icon:res.data.current.condition.icon
       })
     })
@@ -35,7 +35,7 @@ const getWeather = (e) => {
 
   return (
     <div className="test">
-      <Title />
+      <Title cityName={city}/>
       <Form setCity={setCity} getWeather={getWeather}/>
       <Results results={results} />
     </div>
